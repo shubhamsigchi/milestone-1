@@ -1,0 +1,109 @@
+import random
+accounts = []
+
+while True:
+
+    print("\n===== BANKING MANAGEMENT SYSTEM =====")
+    print("1. Create Account")
+    print("2. Show Balance")
+    print("3. Deposit Money")
+    print("4. Withdraw Money")
+    print("5. Exit")
+
+    choice = input("Enter your choice: ")
+
+    # Create Account
+    if choice == "1":
+
+        name = input("Enter your name: ")
+
+        account = random.randint(100000, 999999)
+
+        customer = [name, account, 0]
+        accounts.append(customer)
+
+        print("\nAccount created successfully!")
+        print("Account Holder:", name)
+        print("Your Account Number:", account)
+        print("Initial Balance: ₹0")
+
+    # Show Balance
+    elif choice == "2":
+
+        account = int(input("Enter account number: "))
+
+        found = False
+
+        for customer in accounts:
+
+            if customer[1] == account:
+                print("\nAccount Holder:", customer[0])
+                print("Account Number:", customer[1])
+                print("Current Balance: ₹", customer[2])
+
+                found = True
+
+        if found == False:
+            print("Account not found.")
+
+    # Deposit Money
+    elif choice == "3":
+
+        account = int(input("Enter account number: "))
+        amount = float(input("Enter amount to deposit: "))
+
+        found = False
+
+        for customer in accounts:
+
+            if customer[1] == account:
+
+                print("Balance Before Deposit: ₹", customer[2])
+
+                customer[2] = customer[2] + amount
+
+                print("Deposited Amount: ₹", amount)
+                print("Balance After Deposit: ₹", customer[2])
+
+                found = True
+
+        if found == False:
+            print("Account not found.")
+
+    # Withdraw Money
+    elif choice == "4":
+
+        account = int(input("Enter account number: "))
+        amount = float(input("Enter amount to withdraw: "))
+
+        found = False
+
+        for customer in accounts:
+
+            if customer[1] == account:
+
+                print("Balance Before Withdrawal: ₹", customer[2])
+
+                if amount <= customer[2]:
+
+                    customer[2] = customer[2] - amount
+
+                    print("Withdrawn Amount: ₹", amount)
+                    print("Balance After Withdrawal: ₹", customer[2])
+
+                else:
+                    print("Insufficient Balance!")
+
+                found = True
+
+        if found == False:
+            print("Account not found.")
+
+    # Exit
+    elif choice == "5":
+
+        print("Thank you for using Banking Management System!")
+        break
+
+    else:
+        print("Invalid choice!")
